@@ -1,16 +1,17 @@
 <?php
 date_default_timezone_set('Asia/Jakarta');
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "event_tiket";
+$host = getenv('DB_HOST') ?: "localhost";
+$user = getenv('DB_USER') ?: "root";
+$pass = getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : "";
+$db = getenv('DB_NAME') ?: "event_tiket";
+$port = getenv('DB_PORT') ?: "3306";
 
 try {
-    $conn = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
+    $conn = new PDO("mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch(PDOException $e) {
-    die("Connection failed");
+    die("Connection failed: " . $e->getMessage());
 }
 
 // Database connected
