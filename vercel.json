@@ -5,14 +5,14 @@
       "runtime": "vercel-php@0.9.0"
     }
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(uploads|qrcodes|lineup|profiles)/(.*)",
-      "destination": "/$1/$2"
+      "src": "/(uploads|qrcodes|lineup|profiles)/(.*)",
+      "dest": "/$1/$2"
     },
     {
-      "source": "/(.*)",
-      "destination": "/api/index.php"
+      "src": "/(.*)",
+      "dest": "/api/index.php"
     }
   ]
 }
